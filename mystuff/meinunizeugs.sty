@@ -1,0 +1,120 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{meinunizeugs}
+
+%%% PAKETE %%%
+\RequirePackage[marginpar]{todo}
+\renewcommand{\todomark}{\texttt{TODO}}
+\RequirePackage{enumitem}
+% \RequirePackage{algorithm}
+% \RequirePackage{algpseudocode}
+\RequirePackage{wasysym} % Benötigt für \lightning
+
+\RequirePackage{multicol} % Einfache gleichmäßige Spalten
+\RequirePackage{vwcol} % Spalten mit benutzerdefinierter Breite
+
+% Load commons.sty if not loaded by document class
+\@ifpackageloaded{commons}{}{
+    % Fixes for package loading
+    \newcommand{\obar}{}
+    \let\B\undefined
+    \let\Hom\undefined
+    \let\id\undefined
+    % Kiad package
+    \RequirePackage{commons}
+}
+
+%%% TEXTSACHEN %%%
+\newcommand{\igq}[1]{\textit{\glqq{#1}\grqq}}
+\newcommand{\tdq}[1]{\texttt{\dq{#1}\dq}}
+
+%%% MATHESACHEN %%%
+% Mathe left-right-Sachen
+\newcommand{\cblr}[1]{\ensuremath{\left\{{#1}\right\}}}
+\newcommand{\brlr}[1]{\ensuremath{\left[{#1}\right]}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor{#1}\right\rfloor }}
+% schon passend definiert: \newcommand{\ang}[1]{\ensuremath{\langle #1\rangle}}
+% Mathe Text Sachen
+\newcommand{\mq}[1]{\ensuremath{\quad(\text{#1})}}
+\newcommand{\mt}[1]{\ensuremath{\text{#1}}}
+\newcommand{\mbf}[1]{\ensuremath{\mathbf{#1}}}
+% Vertikaler Vektor
+\let\vvec\pmat
+\let\vect\vvec
+% Matrizen mit LGS-Strich
+\newcommand{\lgsmata}[1]{\left(\begin{array}{c|c}#1\end{array}\right)}
+\newcommand{\lgsmatb}[1]{\left(\begin{array}{cc|c}#1\end{array}\right)}
+\newcommand{\lgsmatc}[1]{\left(\begin{array}{ccc|c}#1\end{array}\right)}
+\newcommand{\lgsmatd}[1]{\left(\begin{array}{cccc|c}#1\end{array}\right)}
+\newcommand{\lgsmate}[1]{\left(\begin{array}{ccccc|c}#1\end{array}\right)}
+\let\lgsmat\lgsmatc
+
+%%% MATHE SYMBOLE %%%
+\newcommand*{\NN}{\ensuremath{\mathbb{N}}}
+\newcommand*{\ZZ}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\RR}{\ensuremath{\mathbb{R}}}
+\newcommand*{\QQ}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\CC}{\ensuremath{\mathbb{C}}}
+\newcommand*{\BB}{\ensuremath{\mathbb{B}}}
+\newcommand*{\Oo}{\ensuremath{\mathcal{O}}}
+% Single-Arrows
+\newcommand*{\ra}   {\ensuremath{\rightarrow}}
+\newcommand*{\la}   {\ensuremath{\leftarrow}}
+\newcommand*{\lra}  {\ensuremath{\leftrightarrow}}
+\newcommand*{\nra}  {\ensuremath{\nrightarrow}}
+\newcommand*{\nla}  {\ensuremath{\nleftarrow}}
+\newcommand*{\nlra} {\ensuremath{\nleftrightarrow}}
+% Double-Arrows
+\newcommand*{\Ra}   {\ensuremath{\Rightarrow}}
+\newcommand*{\La}   {\ensuremath{\Leftarrow}}
+\newcommand*{\Lra}  {\ensuremath{\Leftrightarrow}}
+\newcommand*{\nRa}  {\ensuremath{\nRightarrow}}
+\newcommand*{\nLa}  {\ensuremath{\nLeftarrow}}
+\newcommand*{\nLra} {\ensuremath{\nLeftrightarrow}}
+% Operators etc.
+\newcommand*{\ipl}  {\ensuremath{\implies}}
+\newcommand*{\eqv}  {\ensuremath{\Longleftrightarrow\;}}
+\newcommand*{\eq}   {\ensuremath{\;=\;}}
+\newcommand*{\xx}   {\ensuremath{\times}}
+\newcommand*{\bs}   {\ensuremath{\backslash}}
+\newcommand*{\ltng} {\mt{\lightning}}
+\newcommand*{\sbe}  {\ensuremath{\subseteq}}
+\newcommand*{\spe}  {\ensuremath{\supseteq}}
+\newcommand*{\sbt}  {\ensuremath{\subset}}
+\newcommand*{\spt}  {\ensuremath{\supset}}
+% Operators from LinA
+\DeclareMathOperator{\Spann}{Spann}
+\DeclareMathOperator{\Kern}{Kern}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\Eig}{Eig}
+% Operators from Data Science
+\DeclareMathOperator{\Var}{Var}
+
+% Make wide tilde the standard
+\let\tmp\tilde \let\tilde\widetilde \let\smalltilde\tmp
+
+% Make vec wide
+\let\tmp\vec \let\vec\overrightarrow \let\smallvec\tmp
+
+% Make slanted the standard also for negated comparison
+\let\tmp\nleq \let\nleq\nleqslant \let\nleqstraigt\tmp
+\let\tmp\ngeq \let\nleq\ngeqslant \let\ngeqstraigt\tmp
+
+%%% NUR, WENN NICHT MLUEXERCISE %%%
+\@ifclassloaded{mluexercise}{
+    % Already swapped
+}{
+    % Swap commands for better style.
+    \let\tmp\mod \let\mod\bmod \let\bmod\tmp
+    \let\varemptyset\emptyset \let\emptyset\varnothing
+    \let\tmp\epsilon \let\epsilon\varepsilon \let\varepsilon\tmp
+    \let\tmp\phi \let\phi\varphi \let\varphi\tmp
+}
+
+%%% EXTERNALISIEREN VON TIKZ-BILDERN
+\@ifpackageloaded{tikz}{
+    %\usetikzlibrary{external}
+    %\tikzexternalize[prefix=figures/] % activate and define figures/ as cache folder
+}{
+    % not using tikz
+}
