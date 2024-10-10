@@ -3,3 +3,5 @@
 - `mluexercise` is a homework template from my Uni, which I also probably changed up a bit.
 - `mysuff` contains some quick-and-dirty scripts and shortcuts I use.
 
+submodules are sub modules
+
